@@ -2,9 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-module.exports = () => {
+module.exports = (params) => {
     router.get('/',(request,response)=>{
-        response.render('pages/index',{pageTitle: 'Welcome55' });
+        const {fileService} = params;
+        const dirContents = fileService.getData();
+        return response.json(dirContents);
     });
     return router;
 };
