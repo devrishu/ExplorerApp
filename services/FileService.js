@@ -18,7 +18,9 @@ class FileService{
         } catch (error) {
           console.log(error);
         }
-        return files;
+        let result = {};
+        result[this.dirPath] = files;
+        return result ;
       }
 
 }
