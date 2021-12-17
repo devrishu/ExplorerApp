@@ -1,4 +1,5 @@
 const express = require("express");
+const cp = require("child_process")
 
 const app = express();
 
@@ -10,3 +11,9 @@ app.get('/',(request,response)=>{
 app.listen(port,() => {
     console.log(`express server running on port ${port} !`)
 });
+
+const dirPaths = process.argv.slice(2);
+console.log(dirPaths);
+
+let url = "http://localhost:3000/";
+cp.exec(`start microsoft-edge:${url}`);
