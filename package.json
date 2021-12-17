@@ -1,0 +1,15 @@
+{
+    "name": "DS Assignment",
+    "version": "0.0.1",
+    "description": "Assignment to build explorer app",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "keywords": [],
+    "author": "Dheeraj",
+    "license": "TBD",
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
