@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (params) => {
-    router.get('/',(request,response)=>{
+    router.get('/',async (request,response)=>{
         const {fileService} = params;
-        const dirContents = fileService.getData();
+        const dirContents = await fileService.getData();
         return response.json(dirContents);
     });
     return router;

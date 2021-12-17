@@ -1,17 +1,24 @@
+const fs = require('fs');
+const fsPromises = fs.promises;
+
 class FileService{
     constructor(dirPath){
         this.dirPath = dirPath;
     }
 
-     getList() {
-        const data =  this.getData();
+     async getList() {
+        const data =  await this.getData();
         return data;
       }
 
-     getData() {
-        const data = '["abc","def"]';
-        if (!data) return [];
-        return JSON.parse(data);
+     async getData() {
+       let files;
+       try {
+          files = await fsPromises.readdir(this.dirPath);          
+        } catch (error) {
+          console.log(error);
+        }
+        return files;
       }
 
 }
