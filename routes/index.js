@@ -9,7 +9,7 @@ module.exports = (params) => {
 
     router.get('/fileservice',async (request,response)=>{
         const {fileService} = params;
-        const dirContents = await fileService.getData();
+        const dirContents = fileService.getList();
         return response.json(dirContents);
     });
 

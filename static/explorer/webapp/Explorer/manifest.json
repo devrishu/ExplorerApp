@@ -1,74 +1,29 @@
-{
-    "_version": "1.12.0",
+
+
+
+
+
+
+
+
+  {
+
     "sap.app": {
       "id": "expapp.ui.Explorer",
-      "type": "application",
-      "i18n": "i18n/i18n.properties",
-      "title": "{{appTitle}}",
-      "description": "{{appDescription}}",
       "applicationVersion": {
         "version": "1.0.0"
       }
     },
-    "sap.ui": {
-      "technology": "UI5",
-      "deviceTypes": {
-          "desktop": true,
-          "tablet": true,
-          "phone": true
-      }
-    },
     "sap.ui5": {
       "rootView": {
-          "viewName": "expapp.ui.Explorer.view.App",
-          "type": "XML",
-          "async": true,
-          "id": "app"
+        "viewName": "expapp.ui.Explorer.view.App",
+        "type": "XML",
+        "async": true
       },
       "dependencies": {
-        "minUI5Version": "1.60",
         "libs": {
-          "sap.m": {}
+          "sap.ui.layout": {}
         }
-      },
-      "models": {
-        "i18n": {
-          "type": "sap.ui.model.resource.ResourceModel",
-          "settings": {
-            "bundleName": "expapp.ui.Explorer.i18n.i18n",
-            "supportedLocales": [""],
-            "fallbackLocale": ""
-          }
-        },
-        "tiles": {
-          "type": "sap.ui.model.json.JSONModel",
-          "uri": "Tiles.json"
-          }
-      },
-
-      "routing": {
-        "config": {
-        "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",
-        "viewPath": "expapp.ui.Explorer.view",
-        "controlId": "app",
-        "controlAggregation": "pages",
-        "async": true
-        },
-        "routes": [
-        {
-          "pattern": "",
-          "name": "appHome",
-          "target": "appHome"
-        }
-        ],
-          "targets": {
-                    "appHome": {
-                      "viewID": "S1",
-                      "viewName": "Home"
-                    }
-                  }
       }
-
     }
   }

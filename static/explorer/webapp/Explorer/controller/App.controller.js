@@ -1,15 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
- ], function (Controller,MessageToast) {
-    "use strict";
-    return Controller.extend("expapp.ui.Explorer.controller.App", {   
+    'sap/ui/model/json/JSONModel'
+ ], (Controller,JSONModel) => Controller.extend("expapp.ui.Explorer.controller.App", {   
+      
+   onInit (evt) {
+      // set explored app's demo model on this sample
+      const oModel = new JSONModel("./fileService");
+      this.getView().setModel(oModel);
+   }
 
-
-      onHomePress : function (evt) {
-         var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("appHome");
-
-      }
-    });
- });
+    
+    }));

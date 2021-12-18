@@ -1,8 +1,9 @@
 const express = require("express");
 const cp = require("child_process");
 const path = require("path");
-const routes = require('./routes');
 const cookieSession = require("cookie-session");
+const routes = require('./routes');
+
 
 const FileService = require('./services/FileService');
 
@@ -23,7 +24,7 @@ app.set('views',path.join(__dirname,'./views'));
 app.use(express.static(path.join(__dirname,'./static')));
 
 
-const fileService = new FileService(process.argv[2]);
+const fileService = new FileService(process.argv.slice(2));
 app.use('/',routes({fileService}));
 
 app.listen(port,() => {

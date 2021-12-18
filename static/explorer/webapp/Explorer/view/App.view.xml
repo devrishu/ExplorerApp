@@ -1,14 +1,10 @@
-<mvc:View
+<mvc:View 
  controllerName="expapp.ui.Explorer.controller.App"
-   xmlns="sap.m"
-   xmlns:f="sap.f"
+   xmlns="sap.m"  
    xmlns:mvc="sap.ui.core.mvc">
-   <Shell>
-    <VBox>   
-     	<f:ShellBar title="{i18n>appTitle}"  showCopilot="true" copilotPressed="onHomePress" />
-        <App id="app">  
-
-        </App>
-    </VBox>
-  </Shell>   
+  	<Tree
+		    id="Tree"
+		    items="{path: '/'}">
+			<StandardTreeItem title="{name}"/>
+		</Tree>  
 </mvc:View>

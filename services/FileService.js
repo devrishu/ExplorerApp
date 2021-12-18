@@ -1,26 +1,39 @@
 const fs = require('fs');
-const fsPromises = fs.promises;
 
 class FileService{
-    constructor(dirPath){
-        this.dirPath = dirPath;
-    }
-
-     async getList() {
-        const data =  await this.getData();
-        return data;
+    constructor(dirPaths){
+        this.dirPaths = dirPaths;
       }
 
-     async getData() {
-       let files;
-       try {
-          files = await fsPromises.readdir(this.dirPath);          
-        } catch (error) {
-          console.log(error);
+     getList() {
+      const result = [];
+      let files ;
+      let obj = {};
+      this.dirPaths.forEach(dir => {
+        files = this.getData(dir);
+        obj.name = dir;
+        obj.files = files;
+        result.push(obj); 
+      });   
+      return result; 
+       
+      }
+
+     getData(dirPath) {
+       const result = [];     
+      
+       const files = fs.readdirSync(dirPath);
+
+      files.forEach(file=>{
+        const obj = {};
+        obj.name = file;
+        if(fs.statSync(`${dirPath  }/${  file}`).isDirectory()){
+         obj.files = this.getData(`${dirPath  }/${  file}`);
         }
-        let result = {};
-        result[this.dirPath] = files;
-        return result ;
+        result.push(obj);        
+      });
+      
+      return result;       
       }
 
 }
