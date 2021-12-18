@@ -4,8 +4,23 @@
     <title>Hello World! - <%= pageTitle %> </title>
   </head>
   <body>
+    <script
+	src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+	data-sap-ui-theme="sap_belize" data-sap-ui-libs="sap.m"
+	data-sap-ui-compatVersion="edge"
+	data-sap-ui-async="true"
+	
+	data-sap-ui-onInit="module:sap/ui/core/ComponentSupport" 
+	data-sap-ui-resourceroots='{
+		"expapp.ui": "explorer/webapp"   
+	}' >
+	
+</script>
     <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
+    UI5 integration
+    <div id='content' class="container-fluid">
+      <div data-sap-ui-component data-name="expapp.ui.Explorer" data-id="container" data-settings='{"id" : "rishu"}'/>
+    </div>
 
   </body>
 </html>
