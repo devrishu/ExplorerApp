@@ -13,6 +13,16 @@ module.exports = (params) => {
         return response.json(dirContents);
     });
 
+    router.get('/fileservice/readFile',async (request,response)=>{
+      const {fileService} = params;
+      const {fileName} = request.query;
+      console.log(fileName);
+      const fileContent = fileService.getFileContent(fileName);
+      return response.json(fileContent);
+  });
+
+
+
 
     return router;
 };

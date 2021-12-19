@@ -7,12 +7,14 @@ class FileService{
 
      getList() {
       const result = [];
-      let files ;
-      let obj = {};
+      
       this.dirPaths.forEach(dir => {
-        files = this.getData(dir);
+        let files ;
+        const obj = {};
         obj.name = dir;
-        obj.files = files;
+        obj.isDirectory = true;
+        obj.path = dir ;
+        obj.files = this.getData(dir);
         result.push(obj); 
       });   
       return result; 
@@ -20,14 +22,15 @@ class FileService{
       }
 
      getData(dirPath) {
-       const result = [];     
-      
+       const result = [];         
        const files = fs.readdirSync(dirPath);
-
       files.forEach(file=>{
         const obj = {};
         obj.name = file;
+        obj.isDirectory = false;
+        obj.path = `${dirPath  }/${  file}` ;
         if(fs.statSync(`${dirPath  }/${  file}`).isDirectory()){
+         obj.isDirectory = true;
          obj.files = this.getData(`${dirPath  }/${  file}`);
         }
         result.push(obj);        
@@ -36,6 +39,18 @@ class FileService{
       return result;       
       }
 
+      getFileContent(fileName){
+        const obj = {};
+        try{          
+           const fileContent  =  fs.readFileSync(fileName,{encoding:'utf8', flag:'r'});       
+           obj.content = fileContent; 
+        } catch(err){
+          console.error(err);
+        }
+        
+        return obj;
+
+      }
 }
 
 module.exports = FileService;

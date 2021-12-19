@@ -2,9 +2,27 @@
  controllerName="expapp.ui.Explorer.controller.App"
    xmlns="sap.m"  
    xmlns:mvc="sap.ui.core.mvc">
-  	<Tree
+			<HBox>
+			<Tree minWidth= "200px"
 		    id="Tree"
 		    items="{path: '/'}">
-			<StandardTreeItem title="{name}"/>
-		</Tree>  
+			<!-- <StandardTreeItem title="{name}" press = "handleTreeItemPress" detailPress = "handleTreeItemPress"  /> -->
+			<CustomTreeItem>
+				<Text text="{name}" visible ="{isDirectory}" />
+				<Link text = "{name}" press = "handleTreeItemPress" visible ="{= !${isDirectory} }"/>
+			</CustomTreeItem>
+			</Tree> 
+				<IconTabBar
+					id="idIconTabBar"
+					enableTabReordering="true"
+					class="sapUiResponsiveContentPadding">
+
+					<items>
+			<IconTabFilter  key="info">
+				<Text text="{fileContent>content}" />
+			</IconTabFilter>
+		
+		</items>
+				</IconTabBar>
+			</HBox> 
 </mvc:View>
