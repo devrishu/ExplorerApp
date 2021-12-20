@@ -4,7 +4,7 @@ This repository contains the code for application to show the folder and files i
 
 ## Prerequisite
 
-Node.js is required.  To check if you already have it installed type "node --v" in terminal.
+Node.js is required.  To check if you already have it installed type "node -v" in terminal.
 Install it from https://nodejs.org/en/.
 
 
