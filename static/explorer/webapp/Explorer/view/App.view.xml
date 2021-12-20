@@ -15,6 +15,7 @@
 				<IconTabBar
 					id="idIconTabBar"
 					enableTabReordering="true"
+					minWidth = "400px"
 					class="sapUiResponsiveContentPadding">
 
 					<items>

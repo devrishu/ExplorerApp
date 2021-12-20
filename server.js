@@ -34,5 +34,5 @@ app.listen(port,() => {
 
 // console.log(dirPaths);
 
-// let url = "http://localhost:3000/";
-// cp.exec(`start ${url}`);
+ let url = "http://localhost:3000/";
+ cp.exec(`start ${url}`);

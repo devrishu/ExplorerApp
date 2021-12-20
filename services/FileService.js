@@ -48,7 +48,8 @@ class FileService{
           console.error(err);
         }
         
-        return obj;
+     
+        return obj;;
 
       }
 }
