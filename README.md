@@ -10,10 +10,10 @@ Install it from https://nodejs.org/en/.
 
 
 ## Usage
-In your terminal, create directory ExplorerApp and change into it. Git clone 
+In your terminal,  Git clone
 ```python
 $ git clone https://github.com/devrishu/ExplorerApp
-
+$ cd ExplorerApp
 $ npm install
 
 $ node server "Your directory path"
