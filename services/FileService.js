@@ -1,3 +1,4 @@
+const { dir } = require('console');
 const fs = require('fs');
 
 class FileService{
@@ -6,37 +7,30 @@ class FileService{
       }
 
      getList() {
-      const result = [];
-      
+      const result = [];      
       this.dirPaths.forEach(dir => {
-        let files ;
-        const obj = {};
-        obj.name = dir;
-        obj.isDirectory = true;
-        obj.path = dir ;
-        obj.files = this.getData(dir);
-        result.push(obj); 
+         result.push(this.getData(dir,dir)); 
       });   
       return result; 
        
       }
 
-     getData(dirPath) {
-       const result = [];         
-       const files = fs.readdirSync(dirPath);
-      files.forEach(file=>{
-        const obj = {};
-        obj.name = file;
-        obj.isDirectory = false;
-        obj.path = `${dirPath  }/${  file}` ;
-        if(fs.statSync(`${dirPath  }/${  file}`).isDirectory()){
-         obj.isDirectory = true;
-         obj.files = this.getData(`${dirPath  }/${  file}`);
-        }
-        result.push(obj);        
-      });
+     getData(dirPath,name) {
+      const dirDetail = {};
+      dirDetail.name = name;
+      dirDetail.isDirectory = false;
+      dirDetail.path = dirPath ;
+      dirDetail.files = [];
+
+      if(fs.statSync(`${dirPath }`).isDirectory() ){
+        dirDetail.isDirectory = true ;
+        const files = fs.readdirSync(dirPath);
+        files.forEach(file=>{
+          dirDetail.files.push(this.getData(`${dirPath  }/${  file}`,file))
+        });
+      }
+      return dirDetail;
       
-      return result;       
       }
 
       getFileContent(fileName){
