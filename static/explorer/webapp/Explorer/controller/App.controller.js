@@ -9,10 +9,10 @@ sap.ui.define([
       // set explored app's demo model on this sample
       const oModel = new JSONModel("./fileService");
       this.getView().setModel(oModel);
-      var socket = io();
+      const socket = io();
 
-      socket.on('file change', function(msg) {
-         console.log(msg + 'client');
+      socket.on('file change', (msg) => {
+         console.log(`${msg  }client`);
       });
    },
 
@@ -20,20 +20,20 @@ sap.ui.define([
       const filePath = evt.getSource().getBindingContext().getProperty("path");  
       
       const existingTabs = this.byId("idIconTabBar").getItems();
-      for(let index = 0; index < existingTabs.length ; index ++){
+      for(let index = 0; index < existingTabs.length ; index++){
          const tab = existingTabs[index];
          if(tab.getKey() == filePath){
             this.byId("idIconTabBar").setSelectedKey(filePath); 
             return;
          }
-      }
+      }               
       
+
       const fileName = evt.getSource().getBindingContext().getProperty("name");
       const oModel = new JSONModel(`./fileService/readFile/?fileName=${  filePath}`);
       
       oModel.dataLoaded().then(()=>{
-         
-        const iconTabFilter =  new IconTabFilter({
+         const iconTabFilter =  new IconTabFilter({
             text: fileName ,
             key: filePath,
             
@@ -41,7 +41,6 @@ sap.ui.define([
    
          this.byId("idIconTabBar").addItem(iconTabFilter);
          this.byId("idIconTabBar").setSelectedKey(filePath);
-
          this.initRichTextEditor(iconTabFilter,oModel.getData().content);
       });      
    },
