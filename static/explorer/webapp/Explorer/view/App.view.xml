@@ -25,5 +25,6 @@
 		
 		</items>
 				</IconTabBar>
+			
 			</HBox> 
 </mvc:View>
