@@ -9,6 +9,11 @@ sap.ui.define([
       // set explored app's demo model on this sample
       const oModel = new JSONModel("./fileService");
       this.getView().setModel(oModel);
+      var socket = io();
+
+      socket.on('file change', function(msg) {
+         console.log(msg + 'client');
+      });
    },
 
    handleTreeItemPress(evt){
