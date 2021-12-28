@@ -32,24 +32,23 @@ sap.ui.define([
       const fileName = evt.getSource().getBindingContext().getProperty("name");
       const oModel = new JSONModel(`./fileService/readFile/?fileName=${  filePath}`);
       
-      oModel.dataLoaded().then(()=>{
-         const iconTabFilter =  new IconTabFilter({
-            text: fileName ,
-            key: filePath,
-            
-         });      
-   
-         this.byId("idIconTabBar").addItem(iconTabFilter);
-         this.byId("idIconTabBar").setSelectedKey(filePath);
-         this.initRichTextEditor(iconTabFilter,oModel.getData().content);
+      const iconTabFilter =  new IconTabFilter({
+         text: fileName ,
+         key: filePath,
+         
       });      
+
+      this.byId("idIconTabBar").addItem(iconTabFilter);
+      this.byId("idIconTabBar").setSelectedKey(filePath);
+      this.initRichTextEditor(iconTabFilter,oModel);
+     
    },
 
 
 
 
 
-   initRichTextEditor (tabFilter,content) {      
+   initRichTextEditor (tabFilter,oModel) {      
       
       sap.ui.require(["sap/ui/richtexteditor/RichTextEditor"],
          (RTE) => {
@@ -60,30 +59,12 @@ sap.ui.define([
                showGroupFont: true,
                showGroupLink: true,
                showGroupInsert: true,            
-               value:this.escape(content)
+               value:"{/content}"
             });
+         rte.setModel(oModel);
           tabFilter.addContent(rte);
       });
       
-   },
+   }
 
-    escape(s) {
-      return ('' + s)       
-         .replace(/\\/g, '\\\\')   
-          .replace('{', '\\{')
-          .replace('}', '\\}')         
-          //.replace(/\t/g, '\\t')
-          .replace(/\n/g, '\\n')
-          .replace(/\u00A0/g, '\\u00A0')
-          .replace(/&/g, '\\x26')
-         .replace(/'/g, '\\x27')
-          .replace(/"/g, '\\x22')
-          .replace(/</g, '\\x3C')
-          .replace(/>/g, '\\x3E');
-        
-  }
-
-
-
-    
-    }));
+}));
