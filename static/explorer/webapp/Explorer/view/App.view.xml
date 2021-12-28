@@ -1,9 +1,10 @@
 <mvc:View 
  controllerName="expapp.ui.Explorer.controller.App"
    xmlns="sap.m"  
-   xmlns:mvc="sap.ui.core.mvc">
-		<HBox>
-			<Tree minWidth= "200px"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:ce="sap.ui.codeeditor">
+			<HBox>		
+			<Tree 
 		    id="Tree"
 		    items="{path: '/'}">
 			<!-- <StandardTreeItem title="{name}" press = "handleTreeItemPress" detailPress = "handleTreeItemPress"  /> -->
@@ -12,12 +13,36 @@
 				<Link text = "{name}" press = "handleTreeItemPress" visible ="{= !${isDirectory} }"/>
 			</CustomTreeItem>
 			</Tree> 
-			<IconTabBar
-					id="idIconTabBar"
-					enableTabReordering="true"
-					minWidth = "400px"
-					class="sapUiResponsiveContentPadding">
-			</IconTabBar>
-			
-		</HBox> 
+
+			<VBox width="70%">
+			<TabContainer class="sapUiResponsiveContentPadding sapUiResponsivePadding--header"
+					id="idTabContainer"
+					itemClose="itemCloseHandler">
+
+				<items>
+					<TabContainerItem  key="info"  name= "Welcome page">
+					<content>						
+							<ce:CodeEditor
+								type="json"
+								value='\{
+								"Chinese" : "你好世界",
+								"Dutch" : "Hallo wereld",
+								"English" : "Hello world",
+								"French" : "Bonjour monde",
+								"German" : "Hallo Welt",
+								"Greek" : "γειά σου κόσμος",
+								"Italian" : "Ciao mondo",
+								"Japanese" : "こんにちは世界",
+								"Korean" : "여보세요 세계",
+								"Portuguese" : "Olá mundo",
+								"Russian" : "Здравствуй мир",
+								"Spanish" : "Hola mundo"
+								}'
+								height="600px" width = "500px" />
+								</content>
+					</TabContainerItem>		
+				</items>
+			</TabContainer>			
+			</VBox>
+		</HBox>
 </mvc:View>
