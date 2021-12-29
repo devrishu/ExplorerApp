@@ -29,7 +29,7 @@ sap.ui.define([
          const tab = existingTabs[index];
          if(tab.getKey() == data.fileName){
             if(data.eventType == 'rename'){
-               existingTabs.removeItem(tab);
+               this.byId("idTabContainer").removeItem(tab);
             }else{
                const oModel = new JSONModel(`/fileService/readFile/?fileName=${  data.fileName}`);
                tab.getContent()[0].setModel(oModel);
