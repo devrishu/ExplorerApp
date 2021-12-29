@@ -13,6 +13,7 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 const FileService = require('./services/FileService');
+const FileSystemChangeService = require('./services/FileSystemChangeService');
 
 
 
@@ -32,6 +33,8 @@ app.use(express.static(path.join(__dirname,'./static')));
 
 
 const fileService = new FileService(process.argv.slice(2));
+const fileSystemChangeService = new FileSystemChangeService(process.argv.slice(2),io);
+
 app.use('/',routes({fileService}));
 
 server.listen(port, () => {
@@ -40,16 +43,15 @@ server.listen(port, () => {
 
  const url = "http://localhost:3000/";
  cp.exec(`start ${url}`);
-
- 
-const theOneFunc = delay => {
+fileSystemChangeService.startWatchingFileChanges();
+// const theOneFunc = delay => {
    
-        io.emit('file change','file change');
-        console.log('file change emit');
+//         io.emit('file change','file change');
+//         console.log('file change emit');
         
-  };
-  setTimeout(theOneFunc, 4 * 1000, 4);
-  setTimeout(theOneFunc, 8 * 1000, 8);
+//   };
+//   setTimeout(theOneFunc, 4 * 1000, 4);
+//   setTimeout(theOneFunc, 8 * 1000, 8);
 
 
 

@@ -9,13 +9,13 @@ class FileService{
      getList() {
       const result = [];      
       this.dirPaths.forEach(dir => {
-         result.push(this.getData(dir,dir)); 
+         result.push(this.getDirData(dir,dir)); 
       });   
       return result; 
        
       }
 
-     getData(dirPath,name) {
+     getDirData(dirPath,name) {
       const dirDetail = {};
       dirDetail.name = name;
       dirDetail.isDirectory = false;
@@ -26,7 +26,7 @@ class FileService{
         dirDetail.isDirectory = true ;
         const files = fs.readdirSync(dirPath);
         files.forEach(file=>{
-          dirDetail.files.push(this.getData(`${dirPath  }/${  file}`,file))
+          dirDetail.files.push(this.getDirData(`${dirPath  }/${  file}`,file))
         });
       }
       return dirDetail;

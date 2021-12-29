@@ -1,0 +1,21 @@
+const fs = require('fs');
+
+
+class FileSystemChangeService{
+    constructor(dirPaths,io){
+        this.dirPaths = dirPaths;
+        this.io = io;
+      }
+
+      startWatchingFileChanges(){
+
+        this.dirPaths.forEach(dir => {
+          fs.watch(dir, { recursive :true }, (eventType, filename) => {
+            this.io.emit('file change',filename); 
+          });
+           
+      });
+    }
+
+}
+module.exports = FileSystemChangeService;
