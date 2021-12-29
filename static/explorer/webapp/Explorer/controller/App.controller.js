@@ -7,13 +7,36 @@ sap.ui.define([
       
    onInit (evt) {
       // set explored app's demo model on this sample
-      const oModel = new JSONModel("./fileService");
-      this.getView().setModel(oModel);
+      //this.oModel = new JSONModel("/fileService");
+      //this.getView().setModel(this.oModel);
       const socket = io();
 
-      socket.on('file change', (msg) => {
-         console.log(`${msg  }client`);
+      socket.on('FileChange', (data) => {
+         this.updateView(data);
       });
+   },
+
+   updateView(data){
+      const rootModel = new JSONModel("/fileService");
+      this.getView().setModel(rootModel);
+     rootModel.dataLoaded(()=>{
+      this.byId("treeControl").expand();
+     });
+
+      
+      const existingTabs = this.byId("idTabContainer").getItems();
+      for(let index = 0; index < existingTabs.length ; index++){
+         const tab = existingTabs[index];
+         if(tab.getKey() == data.fileName){
+            if(data.eventType == 'rename'){
+               existingTabs.removeItem(tab);
+            }else{
+               const oModel = new JSONModel(`/fileService/readFile/?fileName=${  data.fileName}`);
+               tab.getContent()[0].setModel(oModel);
+            }            
+         }
+      }               
+
    },
 
    handleTreeItemPress(evt){
@@ -30,7 +53,7 @@ sap.ui.define([
       
 
       const fileName = evt.getSource().getBindingContext().getProperty("name");
-      const oModel = new JSONModel(`./fileService/readFile/?fileName=${  filePath}`);
+      const oModel = new JSONModel(`/fileService/readFile/?fileName=${  filePath}`);
       
       const tabItem =  new TabContainerItem({
          name: fileName ,

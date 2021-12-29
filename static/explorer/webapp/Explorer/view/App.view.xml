@@ -5,8 +5,8 @@
    xmlns:ce="sap.ui.codeeditor">
 			<HBox>		
 			<Tree 
-		    id="Tree"
-		    items="{path: '/'}">
+		    id="treeControl"
+		    items="{/content}">
 			<!-- <StandardTreeItem title="{name}" press = "handleTreeItemPress" detailPress = "handleTreeItemPress"  /> -->
 			<CustomTreeItem>
 				<Text text="{name}" visible ="{isDirectory}" />

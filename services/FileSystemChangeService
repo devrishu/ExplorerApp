@@ -11,7 +11,7 @@ class FileSystemChangeService{
 
         this.dirPaths.forEach(dir => {
           fs.watch(dir, { recursive :true }, (eventType, filename) => {
-            this.io.emit('file change',filename); 
+            this.io.emit('FileChange',{ 'eventType':eventType,'fileName':`${dir }/${ filename}` }); 
           });
            
       });

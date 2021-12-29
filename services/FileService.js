@@ -11,7 +11,7 @@ class FileService{
       this.dirPaths.forEach(dir => {
          result.push(this.getDirData(dir,dir)); 
       });   
-      return result; 
+      return { "content" : result }; 
        
       }
 

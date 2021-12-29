@@ -12,6 +12,12 @@
         "type": "XML",
         "async": true
       },
+      "models": {
+        "": {
+          "type": "sap.ui.model.json.JSONModel",
+          "uri": "/fileService"
+          }
+      },
       "dependencies": {
         "libs": {
           "sap.ui.layout": {}
