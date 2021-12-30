@@ -41,17 +41,10 @@ server.listen(port, () => {
     console.log('listening on *:3000');
   });
 
- const url = "http://localhost:3000/";
- cp.exec(`start ${url}`);
+const url = "http://localhost:3000/";
+cp.exec(`start ${url}`);
 fileSystemChangeService.startWatchingFileChanges();
-// const theOneFunc = delay => {
-   
-//         io.emit('file change','file change');
-//         console.log('file change emit');
-        
-//   };
-//   setTimeout(theOneFunc, 4 * 1000, 4);
-//   setTimeout(theOneFunc, 8 * 1000, 8);
+
 
 
 
