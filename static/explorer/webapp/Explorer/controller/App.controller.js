@@ -6,9 +6,6 @@ sap.ui.define([
  ], (Controller,JSONModel,TabContainerItem,MessageBox) => Controller.extend("expapp.ui.Explorer.controller.App", {   
       
    onInit (evt) {
-      // set explored app's demo model on this sample
-      //this.oModel = new JSONModel("/fileService");
-      //this.getView().setModel(this.oModel);
       const socket = io();
 
       socket.on('FileChange', (data) => {
@@ -17,22 +14,21 @@ sap.ui.define([
    },
 
    updateView(data){
-      const rootModel = new JSONModel("/fileService");
-      this.getView().setModel(rootModel);
-     rootModel.dataLoaded(()=>{
-      this.byId("treeControl").expand();
-     });
-
+  
+      this.getView().getModel().loadData("/fileService");
+  
       
       const existingTabs = this.byId("idTabContainer").getItems();
       for(let index = 0; index < existingTabs.length ; index++){
          const tab = existingTabs[index];
          if(tab.getKey() == data.fileName){
             if(data.eventType == 'rename'){
+                MessageBox.confirm(`The file '${ data.fileName  }' is removed. So the tab is closed.`, {
+                  onClose (oAction) {}
+                });
                this.byId("idTabContainer").removeItem(tab);
-            }else{
-               const oModel = new JSONModel(`/fileService/readFile/?fileName=${  data.fileName}`);
-               tab.getContent()[0].setModel(oModel);
+            }else{             
+               tab.getContent()[0].getModel().loadData(`/fileService/readFile/?fileName=${  data.fileName}`);
             }            
          }
       }               
