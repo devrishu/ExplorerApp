@@ -14,7 +14,6 @@ describe('getDirData',() =>{
                                     ]
                         };
         const actual = fileService.getDirData(dirPath,dirPath);
-        console.log(actual);
         expect(actual).toEqual(expected);
     });
 });
